@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Billing Tukik - Pelanggan</title>
+  <link rel="icon" href="img/tukik.svg">
+  <link rel="stylesheet" href="css/gaya.css">
+  <link rel="stylesheet" href="css/pelanggan.css">
+</head>
+<body class="pelanggan">
+
+  <p id="tanda-uji" class="tanda-uji" role="status" hidden></p>
+  <p id="petunjuk-bunyi" class="petunjuk-bunyi" hidden>Klik di mana saja sekali supaya bunyi bisa keluar.</p>
+
+  <!-- Tampilan sesudah login: "desktop" pelanggan dengan jendela info di pojok kanan atas -->
+  <main id="desktop" class="desktop" hidden>
+    <p id="desktop-pc" class="desktop-pc"></p>
+    <!-- Pengganti jendela info saat diperkecil. Klik untuk membukanya lagi. -->
+    <button id="kotak-waktu" class="kotak-waktu" type="button" title="Buka jendela info" aria-label="Lama pemakaian, klik untuk membuka jendela info" hidden></button>
+    <aside id="jendela-info" class="jendela-info" aria-label="Info pemakaian">
+      <div class="bilah-judul bilah-info">
+        <h2 id="info-judul"></h2>
+        <button id="tombol-perkecil" type="button" title="Perkecil" aria-label="Perkecil jendela info">_</button>
+      </div>
+      <dl class="info-isi">
+        <div><dt>Jam mulai</dt><dd id="info-mulai"></dd></div>
+        <div><dt>Lama pemakaian</dt><dd id="info-lama"></dd></div>
+        <div><dt>Tarif</dt><dd id="info-tarif"></dd></div>
+        <div><dt>Total biaya</dt><dd id="info-total"></dd></div>
+        <div id="baris-sisa" class="baris-sisa" hidden><dt>Sisa waktu</dt><dd id="info-sisa"></dd></div>
+      </dl>
+      <div class="info-tombol">
+        <button id="tombol-stop" type="button">Stop</button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Layar kunci yang menutup seluruh layar -->
+  <section id="layar-kunci" class="layar-kunci">
+    <div class="tombol-kunci">
+      <button id="tombol-layar-penuh" type="button">Layar penuh</button>
+      <button id="tombol-admin" type="button">Admin</button>
+    </div>
+
+    <div class="laut" aria-hidden="true">
+      <div class="sinar"></div>
+      <span class="gelembung"></span>
+      <span class="gelembung"></span>
+      <span class="gelembung"></span>
+      <span class="gelembung"></span>
+      <span class="gelembung"></span>
+      <span class="gelembung"></span>
+      <span class="gelembung"></span>
+      <span class="gelembung"></span>
+      <div class="jalur-tukik"><img class="tukik-renang" src="img/tukik.svg" alt=""></div>
+      <svg class="dasar-laut" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path class="pasir" d="M0 86 C200 66 380 102 600 84 C820 66 1000 100 1200 78 L1200 120 L0 120 Z"/>
+      </svg>
+      <svg class="rumput rumput-kiri" viewBox="0 0 100 140">
+        <path d="M22 140 C8 104 34 84 18 50 C10 32 22 16 24 6 C34 28 44 52 34 84 C30 104 34 122 36 140 Z"/>
+        <path d="M58 140 C46 112 70 92 60 66 C56 54 62 44 66 34 C76 56 84 78 72 104 C68 116 70 128 72 140 Z"/>
+      </svg>
+      <svg class="rumput rumput-kanan" viewBox="0 0 100 140">
+        <path d="M30 140 C16 110 42 90 26 58 C20 44 28 30 32 20 C44 42 52 66 42 96 C38 112 42 126 44 140 Z"/>
+        <path d="M68 140 C60 118 78 104 70 82 C66 72 70 64 74 56 C84 74 90 92 80 114 C76 124 78 132 80 140 Z"/>
+      </svg>
+    </div>
+
+    <div class="isi-kunci">
+      <header class="kepala-kunci">
+        <h1 id="nama-warnet" class="nama-warnet"></h1>
+        <p id="nomor-pc" class="nomor-pc"></p>
+      </header>
+
+      <p id="tulisan-habis" class="tulisan-habis" role="alert" hidden>WAKTU ANDA HABIS</p>
+
+      <!-- Keterangan saat PC tidak bisa login: dikunci, menunggu bayar, atau waktu habis -->
+      <div id="panel-keterangan" class="panel" hidden>
+        <h2 id="keterangan-judul" class="bilah-judul"></h2>
+        <div class="panel-isi">
+          <p id="keterangan-isi"></p>
+          <p id="keterangan-total" class="keterangan-total"></p>
+        </div>
+      </div>
+
+      <!-- Login Personal atau Paket -->
+      <div id="panel-login" class="panel" hidden>
+        <h2 class="bilah-judul">Login Billing Tukik</h2>
+        <div class="panel-isi">
+          <div class="pilih-login" role="group" aria-label="Jenis login">
+            <button id="pilih-personal" type="button" aria-pressed="true">Personal</button>
+            <button id="pilih-paket" type="button" aria-pressed="false">Paket</button>
+          </div>
+
+          <form id="form-personal" class="form-login">
+            <p id="tarif-personal" class="keterangan-login"></p>
+            <label for="personal-nama">Nama pengguna</label>
+            <input id="personal-nama" type="text" maxlength="20" placeholder="Tamu" autocomplete="off">
+            <button class="tombol-masuk" type="submit">Masuk</button>
+          </form>
+
+          <form id="form-paket" class="form-login" hidden>
+            <fieldset class="daftar-paket">
+              <legend>Pilih paket</legend>
+              <div id="daftar-paket"></div>
+            </fieldset>
+            <label for="paket-nama">Nama pengguna</label>
+            <input id="paket-nama" type="text" maxlength="20" placeholder="Tamu" autocomplete="off">
+            <label for="paket-password">Password dari operator</label>
+            <input id="paket-password" type="password" maxlength="20" autocomplete="off">
+            <p id="galat-paket" class="galat" role="alert"></p>
+            <button class="tombol-masuk" type="submit">Masuk</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu admin: mengatur nomor PC komputer ini, memakai password admin -->
+  <dialog id="dialog-admin" class="dialog dialog-admin">
+    <form id="form-admin">
+      <h2>Menu Admin</h2>
+      <label for="admin-password">Password admin</label>
+      <input id="admin-password" type="password" autocomplete="off">
+      <label for="admin-nomor" class="label-berjarak">Nomor PC komputer ini</label>
+      <select id="admin-nomor"></select>
+      <p id="galat-admin" class="galat" role="alert"></p>
+      <div class="deret-tombol">
+        <button type="submit">Simpan</button>
+        <button id="tombol-batal-admin" type="button">Batal</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Kotak pesan dari operator dan peringatan waktu -->
+  <dialog id="kotak-pesan" class="dialog kotak-pesan">
+    <form method="dialog">
+      <h2 id="kotak-judul"></h2>
+      <p id="kotak-isi" class="kotak-isi"></p>
+      <div class="deret-tombol">
+        <button type="submit">OK</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="js/tarif.js"></script>
+  <script src="js/pengaturan.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/bunyi.js"></script>
+  <script src="js/pelanggan.js"></script>
+</body>
+</html>

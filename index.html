@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Billing Tukik - Operator</title>
+  <link rel="icon" href="img/tukik.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/gaya.css">
+</head>
+<body>
+  <div class="jendela" id="jendela">
+    <div class="bilah-judul">
+      <img src="img/tukik.svg" alt="">
+      <span>Billing Tukik - Operator</span>
+    </div>
+
+    <nav class="menu-bar" aria-label="Menu utama">
+      <div class="menu">
+        <button class="menu-judul" type="button" aria-haspopup="true" aria-expanded="false">File</button>
+        <div class="menu-isi" hidden>
+          <button type="button" data-aksi="ganti-operator">Ganti Operator...</button>
+          <hr>
+          <button type="button" data-aksi="keluar">Keluar</button>
+        </div>
+      </div>
+      <div class="menu">
+        <button class="menu-judul" type="button" aria-haspopup="true" aria-expanded="false">Setup</button>
+        <div class="menu-isi" hidden>
+          <button type="button" data-aksi="setup">Konfigurasi...</button>
+        </div>
+      </div>
+      <div class="menu">
+        <button class="menu-judul" type="button" aria-haspopup="true" aria-expanded="false">Tools</button>
+        <div class="menu-isi" hidden>
+          <button type="button" data-aksi="kunci-semua">Kunci Semua PC</button>
+          <button type="button" data-aksi="buka-semua">Buka Semua PC</button>
+          <hr>
+          <button type="button" data-aksi="pesan-semua">Kirim Pesan ke Semua PC...</button>
+          <button type="button" data-aksi="pesan-pc">Kirim Pesan ke PC Terpilih...</button>
+          <hr>
+          <button type="button" data-aksi="tambah-waktu">Tambah Waktu...</button>
+          <button type="button" data-aksi="pindah-pc">Pindah PC...</button>
+          <button type="button" data-aksi="kantin">Kantin...</button>
+          <hr>
+          <button type="button" data-aksi="buat-password">Buat Password Paket...</button>
+        </div>
+      </div>
+      <div class="menu">
+        <button class="menu-judul" type="button" aria-haspopup="true" aria-expanded="false">View</button>
+        <div class="menu-isi" hidden>
+          <button type="button" data-aksi="laporan">Laporan Hari Ini...</button>
+        </div>
+      </div>
+      <div class="menu">
+        <button class="menu-judul" type="button" aria-haspopup="true" aria-expanded="false">Help</button>
+        <div class="menu-isi" hidden>
+          <button type="button" data-aksi="tentang">Tentang Billing Tukik...</button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="toolbar" role="toolbar" aria-label="Aksi cepat">
+      <button type="button" data-aksi="mulai"><img src="img/ikon/mulai.svg" alt="">Mulai</button>
+      <button type="button" data-aksi="selesai"><img src="img/ikon/selesai.svg" alt="">Selesai</button>
+      <span class="pemisah"></span>
+      <button type="button" data-aksi="tambah-waktu"><img src="img/ikon/tambah-waktu.svg" alt="">Tambah Waktu</button>
+      <button type="button" data-aksi="pindah-pc"><img src="img/ikon/pindah.svg" alt="">Pindah PC</button>
+      <button type="button" data-aksi="kantin"><img src="img/ikon/kantin.svg" alt="">Kantin</button>
+      <span class="pemisah"></span>
+      <button type="button" data-aksi="kunci-semua"><img src="img/ikon/kunci.svg" alt="">Kunci Semua</button>
+      <button type="button" data-aksi="buka-semua"><img src="img/ikon/buka.svg" alt="">Buka Semua</button>
+      <button type="button" data-aksi="pesan-semua"><img src="img/ikon/pesan.svg" alt="">Pesan Semua</button>
+      <button type="button" data-aksi="pesan-pc"><img src="img/ikon/pesan.svg" alt="">Pesan PC</button>
+      <span class="pemisah"></span>
+      <button type="button" data-aksi="laporan"><img src="img/ikon/laporan.svg" alt="">Laporan</button>
+      <button type="button" data-aksi="setup"><img src="img/ikon/setup.svg" alt="">Setup</button>
+      <button type="button" data-aksi="ganti-operator"><img src="img/ikon/operator.svg" alt="">Operator</button>
+    </div>
+
+    <p id="tanda-uji" class="tanda-uji" role="status" hidden></p>
+
+    <header class="pita">
+      <img class="maskot" src="img/tukik.svg" alt="Tukik, penyu kecil">
+      <div class="pita-warnet">
+        <h1 id="pita-nama"></h1>
+        <p id="pita-alamat"></p>
+      </div>
+      <p id="pita-tarif" class="pita-tarif"></p>
+    </header>
+
+    <main class="isi">
+      <div class="tab-bar" id="tab-utama" role="tablist" aria-label="Tampilan">
+        <button type="button" role="tab" data-tab="umum" aria-controls="panel-umum">Umum</button>
+        <button type="button" role="tab" data-tab="log" aria-controls="panel-log">Log Pesan</button>
+        <button type="button" role="tab" data-tab="client" aria-controls="panel-client">Client Aktif</button>
+      </div>
+
+      <section class="panel-tab" id="panel-umum" role="tabpanel" aria-label="Umum">
+        <table class="tabel-pc">
+          <thead>
+            <tr>
+              <th scope="col">Nomor PC</th>
+              <th scope="col">Nama Pengguna</th>
+              <th scope="col">Status</th>
+              <th scope="col">Jam Mulai</th>
+              <th scope="col">Lama</th>
+              <th scope="col">Biaya</th>
+            </tr>
+          </thead>
+          <tbody id="isi-tabel"></tbody>
+        </table>
+      </section>
+
+      <section class="panel-tab" id="panel-log" role="tabpanel" aria-label="Log Pesan">
+        <table class="tabel-polos tabel-log">
+          <thead>
+            <tr>
+              <th scope="col">Waktu</th>
+              <th scope="col">Operator</th>
+              <th scope="col">Kejadian</th>
+            </tr>
+          </thead>
+          <tbody id="isi-log"></tbody>
+        </table>
+        <p id="log-kosong" class="kosong">Belum ada kejadian.</p>
+      </section>
+
+      <section class="panel-tab" id="panel-client" role="tabpanel" aria-label="Client Aktif">
+        <table class="tabel-pc tabel-client">
+          <thead>
+            <tr>
+              <th scope="col">Nomor PC</th>
+              <th scope="col">Nama Pengguna</th>
+              <th scope="col">Jenis</th>
+              <th scope="col">Tarif Siang</th>
+              <th scope="col">Jam Mulai</th>
+              <th scope="col">Lama</th>
+              <th scope="col">Biaya</th>
+            </tr>
+          </thead>
+          <tbody id="isi-client"></tbody>
+        </table>
+        <p id="client-kosong" class="kosong">Belum ada PC yang aktif.</p>
+      </section>
+
+      <form id="form-kasir" class="kasir" novalidate>
+        <fieldset class="kelompok">
+          <legend id="kasir-judul">Kasir</legend>
+          <div class="kolom-isian">
+            <label for="kasir-internet">Biaya Internet</label>
+            <output id="kasir-internet" class="angka"></output>
+            <label for="kasir-transaksi">Biaya Transaksi</label>
+            <output id="kasir-transaksi" class="angka"></output>
+            <label for="kasir-total"><b>Total</b></label>
+            <output id="kasir-total" class="angka total"></output>
+          </div>
+        </fieldset>
+        <fieldset class="kelompok">
+          <legend>Pembayaran</legend>
+          <div class="kolom-isian">
+            <label for="kasir-uang">Uang Dibayar</label>
+            <input id="kasir-uang" class="angka" type="number" min="0" step="1" autocomplete="off">
+            <label for="kasir-kembalian">Kembalian</label>
+            <output id="kasir-kembalian" class="angka"></output>
+          </div>
+          <p id="kasir-pesan" class="kasir-pesan" role="status"></p>
+        </fieldset>
+        <button id="tombol-bayar" class="tombol-bayar" type="submit">Bayar</button>
+      </form>
+    </main>
+
+    <footer class="kaki">
+      <span id="info-operator"></span>
+      <span id="info-waktu"></span>
+      <span id="info-aktif"></span>
+    </footer>
+  </div>
+
+  <p id="petunjuk-bunyi" class="petunjuk-bunyi" hidden>Klik di mana saja sekali supaya bunyi bisa keluar.</p>
+
+  <div id="layar-keluar" class="layar-keluar" hidden>
+    <img src="img/tukik.svg" alt="Tukik, penyu kecil">
+    <h2>Sampai jumpa!</h2>
+    <p>Operator sudah keluar. Semua data tetap tersimpan.</p>
+    <button id="tombol-masuk-lagi" type="button">Masuk Lagi</button>
+  </div>
+
+  <dialog id="dialog-mulai" class="dialog">
+    <form id="form-mulai">
+      <h2 id="judul-mulai"></h2>
+      <label for="input-nama">Nama pengguna</label>
+      <input id="input-nama" type="text" maxlength="20" placeholder="Tamu" autocomplete="off">
+      <label for="pilih-jenis-mulai" class="label-berjarak">Jenis sesi</label>
+      <select id="pilih-jenis-mulai"></select>
+      <p id="galat-mulai" class="galat" role="alert"></p>
+      <div class="deret-tombol">
+        <button id="tombol-batal" type="button">Batal</button>
+        <button type="submit">Mulai</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialog-tambah" class="dialog">
+    <form id="form-tambah">
+      <h2 id="judul-tambah"></h2>
+      <p id="sisa-tambah" class="sisa-tambah"></p>
+      <label for="pilih-paket-tambah">Tambah dengan paket</label>
+      <select id="pilih-paket-tambah"></select>
+      <p id="galat-tambah" class="galat" role="alert"></p>
+      <div class="deret-tombol">
+        <button type="button" data-tutup-dialog>Batal</button>
+        <button type="submit">Tambah</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialog-pindah" class="dialog">
+    <form id="form-pindah">
+      <h2 id="judul-pindah"></h2>
+      <label for="pilih-pc-pindah">Pindah ke</label>
+      <select id="pilih-pc-pindah"></select>
+      <p class="catatan">Waktu dan biaya tetap berjalan tanpa terputus.</p>
+      <p id="galat-pindah" class="galat" role="alert"></p>
+      <div class="deret-tombol">
+        <button type="button" data-tutup-dialog>Batal</button>
+        <button id="tombol-pindah" type="submit">Pindahkan</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialog-kantin" class="dialog">
+    <h2 id="judul-kantin"></h2>
+    <div id="menu-kantin" class="menu-kantin"></div>
+    <table class="tabel-polos tabel-kantin">
+      <tbody id="pesanan-kantin"></tbody>
+    </table>
+    <p id="kantin-kosong" class="kosong">Belum ada pesanan.</p>
+    <p id="kantin-jumlah" class="kantin-jumlah"></p>
+    <p id="galat-kantin" class="galat" role="alert"></p>
+    <div class="deret-tombol">
+      <button type="button" data-tutup-dialog>Tutup</button>
+    </div>
+  </dialog>
+
+  <dialog id="dialog-operator" class="dialog">
+    <form id="form-operator">
+      <h2>Ganti Operator</h2>
+      <label for="input-operator">Nama operator</label>
+      <input id="input-operator" type="text" maxlength="20" required autocomplete="off">
+      <div class="deret-tombol">
+        <button type="button" data-tutup-dialog>Batal</button>
+        <button type="submit">Simpan</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialog-pesan" class="dialog">
+    <form id="form-pesan">
+      <h2 id="judul-pesan"></h2>
+      <label for="input-pesan">Isi pesan</label>
+      <textarea id="input-pesan" rows="3" maxlength="200" required></textarea>
+      <div class="deret-tombol">
+        <button type="button" data-tutup-dialog>Batal</button>
+        <button type="submit">Kirim</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialog-buat-password" class="dialog">
+    <form id="form-buat-password">
+      <h2>Buat Password Paket</h2>
+      <label for="pilih-paket-password">Paket</label>
+      <select id="pilih-paket-password"></select>
+      <label for="input-password-paket">Password (berlaku sekali)</label>
+      <input id="input-password-paket" type="text" maxlength="20" autocomplete="off">
+      <p id="galat-password-paket" class="galat" role="alert"></p>
+      <div class="deret-tombol">
+        <button type="button" data-tutup-dialog>Batal</button>
+        <button type="submit">Buat</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialog-password" class="dialog">
+    <form id="form-password">
+      <h2>Password Admin</h2>
+      <label for="input-password">Masukkan password untuk membuka Setup</label>
+      <input id="input-password" type="password" autocomplete="off">
+      <p id="galat-password" class="galat" role="alert"></p>
+      <div class="deret-tombol">
+        <button id="tombol-batal-password" type="button">Batal</button>
+        <button type="submit">Buka</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialog-konfigurasi" class="dialog dialog-lebar">
+    <form id="form-konfigurasi" novalidate>
+      <h2>Konfigurasi</h2>
+      <div class="tab-bar" id="tab-konfigurasi" role="tablist" aria-label="Bagian konfigurasi">
+        <button type="button" role="tab" data-tab="umum" aria-controls="cfg-panel-umum">Umum</button>
+        <button type="button" role="tab" data-tab="biaya" aria-controls="cfg-panel-biaya">Biaya</button>
+        <button type="button" role="tab" data-tab="paket" aria-controls="cfg-panel-paket">Paket</button>
+        <button type="button" role="tab" data-tab="kantin" aria-controls="cfg-panel-kantin">Kantin</button>
+        <button type="button" role="tab" data-tab="waktu" aria-controls="cfg-panel-waktu">Waktu dan Bunyi</button>
+        <button type="button" role="tab" data-tab="struk" aria-controls="cfg-panel-struk">Struk</button>
+        <button type="button" role="tab" data-tab="keamanan" aria-controls="cfg-panel-keamanan">Keamanan</button>
+      </div>
+
+      <section class="panel-konfigurasi" id="cfg-panel-umum" role="tabpanel" aria-label="Umum">
+        <label for="cfg-nama">Nama warnet</label>
+        <input id="cfg-nama" type="text" maxlength="40" autocomplete="off">
+        <label for="cfg-alamat">Alamat warnet</label>
+        <input id="cfg-alamat" type="text" maxlength="80" autocomplete="off">
+      </section>
+
+      <section class="panel-konfigurasi" id="cfg-panel-biaya" role="tabpanel" aria-label="Biaya">
+        <label for="cfg-tarif">Tarif per jam (Rp)</label>
+        <input id="cfg-tarif" type="number" min="0" step="1">
+        <label for="cfg-blok">Ukuran blok (menit)</label>
+        <input id="cfg-blok" type="number" min="1" max="60" step="1">
+        <label for="cfg-malam">Tarif malam per jam, pukul 22.00-05.00 (Rp)</label>
+        <input id="cfg-malam" type="number" min="0" step="1">
+        <p class="catatan">Perubahan tarif hanya berlaku untuk sesi baru. Sesi yang sedang berjalan tetap memakai tarif saat dimulai.</p>
+      </section>
+
+      <section class="panel-konfigurasi" id="cfg-panel-paket" role="tabpanel" aria-label="Paket">
+        <div class="wadah-paket">
+          <table class="tabel-polos tabel-paket">
+            <thead>
+              <tr>
+                <th scope="col">Nama</th>
+                <th scope="col">Durasi (menit)</th>
+                <th scope="col">Harga (Rp)</th>
+                <th scope="col">Berlaku dari</th>
+                <th scope="col">Sampai</th>
+                <th scope="col"><span class="tersembunyi">Hapus</span></th>
+              </tr>
+            </thead>
+            <tbody id="isi-paket"></tbody>
+          </table>
+        </div>
+        <button id="tombol-tambah-paket" type="button">Tambah Paket</button>
+        <p class="catatan">Tulis jam dalam format 24 jam, misalnya 22:00. Kosongkan kalau paket berlaku kapan saja.</p>
+      </section>
+
+      <section class="panel-konfigurasi" id="cfg-panel-kantin" role="tabpanel" aria-label="Kantin">
+        <div class="wadah-paket">
+          <table class="tabel-polos tabel-paket">
+            <thead>
+              <tr>
+                <th scope="col">Nama barang</th>
+                <th scope="col">Harga (Rp)</th>
+                <th scope="col"><span class="tersembunyi">Hapus</span></th>
+              </tr>
+            </thead>
+            <tbody id="isi-kantin"></tbody>
+          </table>
+        </div>
+        <button id="tombol-tambah-barang" type="button">Tambah Barang</button>
+        <p class="catatan">Perubahan menu tidak mengubah harga pesanan yang sudah masuk tagihan.</p>
+      </section>
+
+      <section class="panel-konfigurasi" id="cfg-panel-waktu" role="tabpanel" aria-label="Waktu dan Bunyi">
+        <label for="cfg-peringatan">Peringatan sebelum paket habis (menit)</label>
+        <input id="cfg-peringatan" type="number" min="1" step="1">
+        <label class="pilihan-cek"><input id="cfg-bunyi" type="checkbox"> Bunyi hidup</label>
+        <label class="pilihan-cek"><input id="cfg-uji" type="checkbox"> Mode uji: 1 menit berjalan dalam 1 detik</label>
+        <label for="cfg-jam-uji">Jam uji untuk mengecek jam berlaku paket (boleh kosong)</label>
+        <input id="cfg-jam-uji" type="text" maxlength="5" placeholder="22:30" autocomplete="off">
+        <p class="catatan">Pada 30 detik terakhir paket, waktu kembali ke kecepatan normal. Transaksi mode uji tidak dihitung di Total pendapatan.</p>
+      </section>
+
+      <section class="panel-konfigurasi" id="cfg-panel-struk" role="tabpanel" aria-label="Struk">
+        <label for="cfg-kertas">Ukuran kertas</label>
+        <select id="cfg-kertas">
+          <option value="58">58 mm</option>
+          <option value="80">80 mm</option>
+          <option value="A4">A4</option>
+        </select>
+        <label class="pilihan-cek"><input id="cfg-cetak-otomatis" type="checkbox"> Cetak otomatis setelah bayar</label>
+        <p class="catatan">Chrome tetap menampilkan jendela Print sebelum mencetak.</p>
+      </section>
+
+      <section class="panel-konfigurasi" id="cfg-panel-keamanan" role="tabpanel" aria-label="Keamanan">
+        <label for="cfg-password">Password admin baru</label>
+        <input id="cfg-password" type="password" autocomplete="new-password">
+        <label for="cfg-ulang">Ulangi password baru</label>
+        <input id="cfg-ulang" type="password" autocomplete="new-password">
+        <p class="catatan">Kosongkan kalau password tidak ingin diganti.</p>
+      </section>
+
+      <p id="galat-konfigurasi" class="galat" role="alert"></p>
+      <div class="deret-tombol">
+        <button id="tombol-batal-konfigurasi" type="button">Batal</button>
+        <button type="submit">Simpan</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialog-laporan" class="dialog dialog-lebar">
+    <h2>Laporan Hari Ini</h2>
+    <p id="laporan-tanggal"></p>
+    <dl class="ringkasan">
+      <div><dt>Jumlah sesi</dt><dd id="laporan-sesi"></dd></div>
+      <div><dt>Total pendapatan</dt><dd id="laporan-pendapatan"></dd></div>
+      <div id="laporan-kotak-uji"><dt>Mode uji (tidak dihitung)</dt><dd id="laporan-uji"></dd></div>
+    </dl>
+    <div class="wadah-laporan">
+      <table class="tabel-polos">
+        <thead>
+          <tr>
+            <th scope="col">Jam Bayar</th>
+            <th scope="col">PC</th>
+            <th scope="col">Pengguna</th>
+            <th scope="col">Jenis</th>
+            <th scope="col">Lama</th>
+            <th scope="col">Operator</th>
+            <th scope="col">Total</th>
+            <th scope="col">Ket.</th>
+          </tr>
+        </thead>
+        <tbody id="isi-laporan"></tbody>
+      </table>
+      <p id="laporan-kosong" class="kosong">Belum ada transaksi hari ini.</p>
+    </div>
+    <div class="deret-tombol">
+      <button type="button" data-tutup-dialog>Tutup</button>
+    </div>
+  </dialog>
+
+  <dialog id="dialog-tentang" class="dialog tentang">
+    <img src="img/tukik.svg" alt="Tukik, penyu kecil">
+    <h2>Billing Tukik</h2>
+    <p>Versi 1.0</p>
+    <p>Aplikasi billing warnet buatan kanal Kode Kenangan, dengan maskot Tukik si penyu kecil.</p>
+    <p class="catatan">Menghidupkan masa lalu lewat baris waktu.</p>
+    <div class="deret-tombol">
+      <button type="button" data-tutup-dialog>OK</button>
+    </div>
+  </dialog>
+
+  <dialog id="dialog-struk" class="dialog struk">
+    <!-- Bagian ini saja yang tercetak di kertas -->
+    <div id="kertas-struk">
+      <h2 id="struk-warnet"></h2>
+      <p id="struk-alamat" class="sub-struk"></p>
+      <p id="struk-uji" class="sub-struk struk-uji" hidden>*** MODE UJI ***</p>
+      <div id="isi-struk"></div>
+      <p class="sub-struk">Terima kasih, sampai ketemu lagi!</p>
+    </div>
+    <div class="deret-tombol">
+      <button id="tombol-cetak-struk" type="button">Cetak</button>
+      <button id="tombol-tutup-struk" type="button">Tutup</button>
+    </div>
+  </dialog>
+
+  <!-- Urutan penting: setiap file memakai isi file di atasnya, dan operator.js menyalakan aplikasi -->
+  <script src="js/tarif.js"></script>
+  <script src="js/pengaturan.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/bunyi.js"></script>
+  <script src="js/tab.js"></script>
+  <script src="js/kasir.js"></script>
+  <script src="js/setup.js"></script>
+  <script src="js/layanan.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/operator.js"></script>
+</body>
+</html>

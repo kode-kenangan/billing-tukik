@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Tukik, penyu kecil">
+  <!-- Sirip belakang -->
+  <path d="M24 66 C14 70 9 78 10 84 C18 84 28 78 33 71 Z" fill="#3fae6a" stroke="#14532d" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Sirip depan -->
+  <path d="M58 66 C60 76 56 86 48 92 C42 86 42 76 46 68 Z" fill="#3fae6a" stroke="#14532d" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Perut -->
+  <path d="M16 62 C26 72 56 72 68 60 Z" fill="#f4e7a8" stroke="#14532d" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Kepala -->
+  <circle cx="74" cy="42" r="17" fill="#5cc985" stroke="#14532d" stroke-width="2.5"/>
+  <!-- Tempurung -->
+  <path d="M12 62 C12 34 28 22 44 22 C60 22 70 40 70 62 Z" fill="#1f8a70" stroke="#14532d" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Pola tempurung -->
+  <path d="M41 33 L52 40 L50 53 L36 53 L32 40 Z" fill="#f5a524" stroke="#14532d" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M26 43 L32 40 L36 53 L24 56 Z M52 40 L60 44 L62 56 L50 53 Z" fill="#f7c35f" stroke="#14532d" stroke-width="2" stroke-linejoin="round"/>
+  <!-- Mata -->
+  <circle cx="79" cy="38" r="6" fill="#ffffff" stroke="#14532d" stroke-width="1.5"/>
+  <circle cx="81" cy="38" r="3.4" fill="#14161c"/>
+  <circle cx="82.2" cy="36.6" r="1.1" fill="#ffffff"/>
+  <!-- Senyum -->
+  <path d="M73 50 C77 54 83 53 86 49" fill="none" stroke="#14532d" stroke-width="2" stroke-linecap="round"/>
+</svg>
